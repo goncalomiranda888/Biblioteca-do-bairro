@@ -1,0 +1,187 @@
+/* ==========================================
+VARIÁVEIS (:root)
+================================---------- /
+:root {
+--cor-principal: #23395B;
+--cor-destaque: #A84B33;
+--cor-fundo: #FFF8F0;
+--cor-texto: #333333;
+--cor-cartao: #FFFFFF;
+--cor-borda: #E5DED3;
+--raio: 12px;
+}
+/* ==========================================
+BASE
+================================---------- /
+{
+box-sizing: border-box;
+}
+body {
+margin: 0;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 1.125rem;
+line-height: 1.6;
+background: var(--cor-fundo);
+color: var(--cor-texto);
+}
+h1, h2, h3 {
+font-family: "Lora", Georgia, serif;
+color: var(--cor-principal);
+}
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.25rem; }
+img {
+max-width: 100%;
+height: auto;
+}
+a {
+color: var(--cor-principal);
+text-decoration: none;
+}
+a:hover {
+color: var(--cor-destaque);
+}
+a:focus-visible,
+button:focus-visible {
+outline: 3px solid var(--cor-principal);
+outline-offset: 3px;
+}
+/* ==========================================
+LAYOUT (Estrutura com Grid / Flexbox)
+================================---------- /
+body {
+display: block;
+}
+header {
+background: var(--cor-principal);
+color: #FFF8F0;
+padding: 1.5rem 2rem;
+display: flex;
+flex-direction: column;
+gap: 1rem;
+}
+.cabecalho {
+display: flex;
+flex-direction: column;
+gap: 1rem;
+align-items: flex-start;
+}
+.cabecalho nav ul {
+display: flex;
+gap: 1.5rem;
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.cabecalho nav a {
+color: #FFF8F0;
+}
+main {
+max-width: 960px;
+margin: 0 auto;
+padding: 2rem 1rem;
+}
+aside {
+padding: 1rem;
+background: #F2CC8F;
+border-radius: var(--raio);
+margin-top: 2rem;
+}
+footer {
+padding: 1.5rem 2rem;
+background: var(--cor-principal);
+color: #FFF8F0;
+display: flex;
+justify-content: space-between;
+}
+/* ==========================================
+COMPONENTES (Cartões, Botões, Etiquetas)
+================================---------- /
+.etiqueta {
+text-transform: uppercase;
+letter-spacing: 2px;
+color: var(--cor-destaque);
+font-size: 0.875rem;
+font-weight: bold;
+}
+.cartoes {
+display: flex;
+flex-wrap: wrap;
+gap: 1rem;
+}
+.cartao {
+background: var(--cor-cartao);
+padding: 1.5rem;
+border: 1px solid var(--cor-borda);
+border-left: 6px solid var(--cor-destaque);
+border-radius: var(--raio);
+box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+flex: 1 1 250px;
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cartao:hover {
+transform: translateY(-4px);
+box-shadow: 0 12px 24px rgb(0 0 0 / 0.15);
+}
+.botao {
+display: inline-block;
+padding: 0.6rem 1.4rem;
+background: var(--cor-destaque);
+color: white;
+border-radius: 8px;
+text-decoration: none;
+font-weight: bold;
+}
+.botao:hover {
+background: #873A28;
+color: white;
+}
+.aviso {
+background: linear-gradient(90deg, #E07A5F, #F2CC8F);
+padding: 1rem;
+border-radius: var(--raio);
+margin: 1.5rem 0;
+font-weight: bold;
+}
+/* ==========================================
+MEDIA QUERIES (Design Responsivo)
+================================---------- /
+@media (min-width: 768px) {
+.cabecalho {
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+}
+}
+@media (min-width: 1024px) {
+body {
+display: grid;
+grid-template-areas:
+"topo topo"
+"menu menu"
+"conteudo lateral"
+"rodape rodape";
+grid-template-columns: 1fr 280px;
+}
+header {
+grid-area: topo;
+}
+.cabecalho {
+grid-area: menu;
+background: #1c2f4c;
+padding: 0.75rem 2rem;
+}
+main {
+grid-area: conteudo;
+max-width: none;
+width: 100%;
+}
+aside {
+grid-area: lateral;
+margin-top: 2rem;
+}
+footer {
+grid-area: rodape;
+}
+}
