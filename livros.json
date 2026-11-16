@@ -1,0 +1,38 @@
+[
+    {
+        "titulo": "Os Maias",
+        "autor": "Eça de Queirós",
+        "ano": 1888,
+        "disponivel": true
+    },
+    {
+        "titulo": "Mensagem",
+        "autor": "Fernando Pessoa",
+        "ano": 1934,
+        "disponivel": true
+    },
+    {
+        "titulo": "A Sibila",
+        "autor": "Agustina Bessa-Luís",
+        "ano": 1954,
+        "disponivel": false
+    },
+    {
+        "titulo": "O Principezinho",
+        "autor": "Antoine de Saint-Exupéry",
+        "ano": 1943,
+        "disponivel": true
+    },
+    {
+        "titulo": "Ensaio sobre a Cegueira",
+        "autor": "José Saramago",
+        "ano": 1995,
+        "disponivel": true
+    },
+    {
+        "titulo": "Aparição",
+        "autor": "Vergílio Ferreira",
+        "ano": 1959,
+        "disponivel": false
+    }
+]

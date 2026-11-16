@@ -1,0 +1,314 @@
+:root {
+    color-scheme: light;
+    --cor-fundo: #fff8f0;
+    --cor-superficie: #ffffff;
+    --cor-texto: #302d2a;
+    --cor-secundaria: #625a52;
+    --cor-principal: #23395b;
+    --cor-destaque: #a84b33;
+    --cor-borda: #e5ded3;
+    --cor-sucesso: #23613c;
+    --cor-erro: #a12622;
+    --sombra: 0 8px 24px rgb(35 57 91 / 8%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    margin: 0;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    font: 1rem/1.6 Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--cor-destaque);
+    outline-offset: 3px;
+}
+
+.cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem max(1.25rem, calc((100% - 1040px) / 2));
+    background: var(--cor-principal);
+    color: #fff;
+}
+
+.marca {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.cabecalho nav {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.cabecalho nav a {
+    text-decoration: none;
+}
+
+.cabecalho nav a[aria-current="page"] {
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+}
+
+main {
+    width: min(100% - 2rem, 920px);
+    margin: 0 auto;
+}
+
+.introducao {
+    padding: 3.5rem 0 2rem;
+}
+
+.sobretitulo {
+    margin-bottom: 0.25rem;
+    color: var(--cor-destaque);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--cor-principal);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.2;
+}
+
+h1 {
+    margin-bottom: 0.5rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+}
+
+h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+}
+
+.introducao > p:last-child,
+.inscricao > p,
+.texto-secundario {
+    color: var(--cor-secundaria);
+}
+
+.catalogo,
+.inscricao {
+    margin: 1rem 0 2rem;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    border: 1px solid var(--cor-borda);
+    border-radius: 16px;
+    background: var(--cor-superficie);
+    box-shadow: var(--sombra);
+}
+
+.cabecalho-seccao {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.cabecalho-seccao p {
+    margin-bottom: 0;
+}
+
+.campo-pesquisa,
+#formulario-inscricao label {
+    display: grid;
+    gap: 0.4rem;
+    font-weight: 700;
+}
+
+input {
+    width: 100%;
+    min-height: 2.8rem;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+}
+
+.botao {
+    min-height: 2.7rem;
+    padding: 0.55rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: var(--cor-destaque);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.botao:hover {
+    filter: brightness(0.92);
+}
+
+.botao-secundario {
+    border: 1px solid var(--cor-principal);
+    background: transparent;
+    color: var(--cor-principal);
+}
+
+.cabecalho .botao-secundario {
+    border-color: #fff;
+    color: #fff;
+}
+
+.botao[aria-pressed="true"] {
+    background: var(--cor-principal);
+    color: #fff;
+}
+
+#lista-livros {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.livro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.25rem;
+    padding: 1rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+}
+
+.livro p {
+    margin: 0;
+}
+
+.livro-titulo {
+    font-weight: 700;
+}
+
+.livro-detalhe,
+.estado-livro {
+    color: var(--cor-secundaria);
+    font-size: 0.9rem;
+}
+
+.indisponivel .livro-titulo,
+.indisponivel .estado-livro {
+    color: var(--cor-erro);
+}
+
+.livro-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.livro-acoes .botao {
+    min-height: 2.25rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+.mensagem {
+    min-height: 1.5em;
+    margin: 0.75rem 0 0;
+    color: var(--cor-secundaria);
+}
+
+.mensagem.erro {
+    color: var(--cor-erro);
+}
+
+.mensagem.sucesso {
+    color: var(--cor-sucesso);
+}
+
+#formulario-inscricao {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 32rem;
+}
+
+#formulario-inscricao .botao {
+    justify-self: start;
+    margin-top: 0.25rem;
+}
+
+footer {
+    margin-top: 3rem;
+    padding: 1.5rem 1rem;
+    background: var(--cor-principal);
+    color: #fff;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+body.modo-escuro {
+    color-scheme: dark;
+    --cor-fundo: #171b22;
+    --cor-superficie: #222832;
+    --cor-texto: #f3eee7;
+    --cor-secundaria: #cbc3b8;
+    --cor-principal: #a9c1e8;
+    --cor-destaque: #ee987e;
+    --cor-borda: #414955;
+    --cor-sucesso: #91d6a6;
+    --cor-erro: #ff9a91;
+    --sombra: 0 8px 24px rgb(0 0 0 / 18%);
+}
+
+body.modo-escuro .cabecalho,
+body.modo-escuro footer {
+    background: #151d2b;
+    color: #fff;
+}
+
+@media (max-width: 560px) {
+    .cabecalho {
+        justify-content: flex-start;
+    }
+
+    .cabecalho .botao {
+        margin-left: auto;
+    }
+
+    .cabecalho-seccao {
+        align-items: flex-start;
+    }
+}

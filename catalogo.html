@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pesquisa e consulta os livros da Biblioteca do Bairro.">
+    <title>Catálogo | Biblioteca do Bairro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header class="cabecalho">
+        <a class="marca" href="index.html">Biblioteca do Bairro</a>
+        <nav aria-label="Navegação principal">
+            <a href="index.html">Início</a>
+            <a href="catalogo.html" aria-current="page">Catálogo</a>
+        </nav>
+        <button id="alternar-tema" class="botao botao-secundario" type="button" aria-pressed="false">
+            Modo escuro
+        </button>
+    </header>
+
+    <main>
+        <section class="introducao" aria-labelledby="titulo-pagina">
+            <p class="sobretitulo">Lê, descobre, partilha</p>
+            <h1 id="titulo-pagina">Catálogo de livros</h1>
+            <p>Encontra a tua próxima leitura e guarda os teus livros favoritos.</p>
+        </section>
+
+        <section class="catalogo" aria-labelledby="titulo-catalogo">
+            <div class="cabecalho-seccao">
+                <div>
+                    <h2 id="titulo-catalogo"></h2>
+                    <p id="livro-mais-antigo" class="texto-secundario"></p>
+                </div>
+                <button id="alternar-disponiveis" class="botao botao-secundario" type="button" aria-pressed="false">
+                    Só disponíveis
+                </button>
+            </div>
+
+            <label class="campo-pesquisa" for="pesquisa-livros">
+                Pesquisar por título ou autor
+                <input id="pesquisa-livros" type="search" placeholder="Ex.: Os Maias" autocomplete="off">
+            </label>
+
+            <p id="mensagem-catalogo" class="mensagem" role="status" aria-live="polite"></p>
+            <ul id="lista-livros"></ul>
+        </section>
+
+        <section class="inscricao" aria-labelledby="titulo-inscricao">
+            <h2 id="titulo-inscricao">Inscrição na biblioteca</h2>
+            <p>Preenche os teus dados para receber novidades da biblioteca.</p>
+            <form id="formulario-inscricao" novalidate>
+                <label for="nome">Nome</label>
+                <input id="nome" name="nome" type="text" autocomplete="name" required minlength="2">
+
+                <label for="email">E-mail</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+
+                <button class="botao" type="submit">Inscrever-me</button>
+                <p id="mensagem-inscricao" class="mensagem" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Biblioteca do Bairro · Rua das Flores, 12</p>
+    </footer>
+</body>
+</html>
