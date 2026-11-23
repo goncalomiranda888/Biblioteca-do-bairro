@@ -2,13 +2,32 @@
    1. VARIÁVEIS (:root)
    ================================---------- */
 :root {
+    color-scheme: light;
     --cor-principal: #23395B;
     --cor-destaque: #A84B33;
     --cor-fundo: #FFF8F0;
     --cor-texto: #333333;
+    --cor-secundaria: #625a52;
     --cor-cartao: #FFFFFF;
     --cor-borda: #E5DED3;
+    --cor-erro: #a12622;
+    --cor-faixa: #23395B;
+    --cor-faixa-texto: #FFF8F0;
     --raio: 12px;
+}
+
+body.escuro {
+    color-scheme: dark;
+    --cor-principal: #a9c1e8;
+    --cor-destaque: #ee987e;
+    --cor-fundo: #171b22;
+    --cor-texto: #f3eee7;
+    --cor-secundaria: #cbc3b8;
+    --cor-cartao: #222832;
+    --cor-borda: #414955;
+    --cor-erro: #ff9a91;
+    --cor-faixa: #12171b;
+    --cor-faixa-texto: #f3eee7;
 }
 
 /* ==========================================
@@ -16,6 +35,10 @@
    ================================---------- */
 * {
     box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
 }
 
 body {
@@ -64,8 +87,8 @@ body {
 }
 
 header {
-    background: var(--cor-principal);
-    color: #FFF8F0;
+    background: var(--cor-faixa);
+    color: var(--cor-faixa-texto);
     padding: 1.5rem 2rem;
     display: flex;
     flex-direction: column;
@@ -87,6 +110,14 @@ header {
     padding: 0;
 }
 
+.cabecalho nav {
+    display: none;
+}
+
+.cabecalho nav.aberta {
+    display: block;
+}
+
 .cabecalho nav a {
     color: #FFF8F0;
 }
@@ -99,15 +130,16 @@ main {
 
 aside {
     padding: 1rem;
-    background: #F2CC8F;
+    background: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
     border-radius: var(--raio);
     margin-top: 2rem;
 }
 
 footer {
     padding: 1.5rem 2rem;
-    background: var(--cor-principal);
-    color: #FFF8F0;
+    background: var(--cor-faixa);
+    color: var(--cor-faixa-texto);
     display: flex;
     justify-content: space-between;
 }
@@ -149,15 +181,15 @@ footer {
     display: inline-block;
     padding: 0.6rem 1.4rem;
     background: var(--cor-destaque);
-    color: white;
+    color: var(--cor-fundo);
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
 }
 
 .botao:hover {
-    background: #873A28;
-    color: white;
+    background: var(--cor-principal);
+    color: var(--cor-fundo);
 }
 
 .aviso {
@@ -166,6 +198,11 @@ footer {
     border-radius: var(--raio);
     margin: 1.5rem 0;
     font-weight: bold;
+}
+
+body.escuro .aviso {
+    background: var(--cor-cartao);
+    color: var(--cor-texto);
 }
 
 /* ==========================================
@@ -196,7 +233,7 @@ footer {
 
     .cabecalho {
         grid-area: menu;
-        background: #1c2f4c;
+        background: var(--cor-faixa);
         padding: 0.75rem 2rem;
     }
 
@@ -213,5 +250,196 @@ footer {
 
     footer {
         grid-area: rodape;
+    }
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background: var(--cor-cartao);
+    color: var(--cor-texto);
+}
+
+textarea {
+    resize: vertical;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--cor-principal);
+    outline-offset: 3px;
+}
+
+.tema-controlos,
+.acoes,
+.linha,
+.acoes-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.tema-controlos {
+    justify-content: flex-end;
+}
+
+.botao-secundario {
+    border: 1px solid var(--cor-principal);
+    background: transparent;
+    color: var(--cor-principal);
+}
+
+.botao-secundario:hover {
+    background: var(--cor-principal);
+    color: var(--cor-fundo);
+}
+
+.botao:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.botao-texto {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+}
+
+.abertura,
+.eventos,
+.formulario {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.abertura,
+main > section {
+    margin-bottom: 1.5rem;
+}
+
+.campo {
+    display: grid;
+    gap: 0.3rem;
+    margin-top: 0.8rem;
+}
+
+.linha input {
+    flex: 1 1 12rem;
+    width: auto;
+}
+
+.ajuda,
+.estado-livro {
+    color: var(--cor-secundaria);
+}
+
+.evento {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+}
+
+.evento p {
+    margin: 0;
+}
+
+.lista {
+    display: grid;
+    gap: 0.5rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lista > li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.65rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+}
+
+.titulo-lista.lido {
+    color: var(--cor-secundaria);
+    text-decoration: line-through;
+}
+
+.contador {
+    color: var(--cor-secundaria);
+    font-size: 0.85rem;
+    text-align: right;
+}
+
+.contador.excesso {
+    color: var(--cor-erro);
+}
+
+.barra-progresso {
+    height: 0.8rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--cor-borda);
+}
+
+.progresso {
+    width: var(--progresso-leitura, 0%);
+    height: 100%;
+    background: var(--cor-destaque);
+    transition: width 0.15s ease;
+}
+
+.progresso.completo {
+    background: var(--cor-principal);
+}
+
+.controlo-cor {
+    max-width: 12rem;
+}
+
+input[type="color"] {
+    width: 3.5rem;
+    height: 2.5rem;
+    padding: 0.15rem;
+}
+
+input[type="range"] {
+    accent-color: var(--cor-destaque);
+}
+
+@media (max-width: 767px) {
+    .cabecalho nav.aberta {
+        width: 100%;
+    }
+
+    .cabecalho nav ul {
+        flex-wrap: wrap;
+    }
+
+    header {
+        align-items: flex-start;
     }
 }

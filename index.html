@@ -3,64 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Biblioteca do Bairro: livros, eventos e atividades de leitura.">
     <title>Biblioteca do Bairro</title>
-    <link rel="stylesheet" href="asd.css">
+    <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
 </head>
 <body>
-
-    <header>
-        <h1>Biblioteca do Bairro</h1>
-        <p>Livros, eventos e leitura para todos, desde 1987.</p>
+    <header class="cabecalho">
+        <a class="marca" href="index.html">
+            <span class="marca-simbolo" aria-hidden="true">B</span>
+            <span class="marca-texto">
+                <strong>Biblioteca do Bairro</strong>
+                <small>desde 1987</small>
+            </span>
+        </a>
+        <nav id="navegacao-principal" aria-label="Navegação principal">
+            <a href="index.html" aria-current="page">Início</a>
+            <a href="catalogo.html">Catálogo</a>
+            <a href="#eventos">Eventos</a>
+            <a href="#inscricao-clube">Clube de leitura</a>
+        </nav>
+        <div class="tema-controlos">
+            <button class="botao botao-secundario botao-pequeno" type="button" data-tema-botao aria-pressed="false">Tema escuro</button>
+            <button class="botao-texto" type="button" data-seguir-sistema>Seguir o sistema</button>
+            <button id="botao-menu" class="botao botao-secundario botao-pequeno" type="button" aria-controls="navegacao-principal" aria-expanded="false">Menu</button>
+        </div>
     </header>
 
-    <div class="cabecalho">
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="catalogo.html">Catálogo</a></li>
-                <li><a href="eventos.html">Eventos</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="contactos.html">Contactos</a></li>
-            </ul>
-        </nav>
-    </div>
-
     <main>
+        <section class="abertura">
+            <p class="etiqueta">Leitura para todos</p>
+            <h1>Descobre a tua próxima leitura.</h1>
+            <p>Consulta os destaques, acompanha o teu progresso e organiza os livros que queres ler.</p>
+            <a class="botao" href="catalogo.html">Abrir catálogo</a>
+        </section>
+
         <div class="aviso">
             Feira do Livro · 13 a 15 de novembro
         </div>
 
-        <section>
-            <h2>Destaques do Mês</h2>
+        <section aria-labelledby="titulo-destaques">
+            <h2 id="titulo-destaques">Destaques do mês</h2>
             <div class="cartoes">
-                <article class="cartao">
+                <article id="livro-destaque" class="cartao livro" data-estado="disponivel" data-devolucao="2026-12-10">
+                    <span class="etiqueta">Livro em destaque</span>
+                    <img class="capa" src="https://placehold.co/240x320/1f4e5f/ffffff?text=Memorial" alt="Capa de Memorial do Convento">
+                    <h3 id="titulo-destaque">Memorial do Convento</h3>
+                    <p id="estado-destaque" class="estado-livro"></p>
+                    <div class="acoes">
+                        <a id="ver-mais-destaque" class="botao" href="/catalogo?autor=Jose%20Saramago">Ver mais</a>
+                        <button id="reservar-destaque" class="botao botao-secundario reservar" type="button">Reservar</button>
+                    </div>
+                </article>
+                <article class="cartao livro" data-estado="disponivel">
                     <span class="etiqueta">Infantil</span>
                     <h3>O Principezinho</h3>
                     <p>Antoine de Saint-Exupéry</p>
-                    <a href="#" class="botao">Inscrever-me</a>
+                    <button class="botao reservar" type="button">Reservar</button>
                 </article>
-
-                <article class="cartao">
+                <article class="cartao livro" data-estado="emprestado" data-devolucao="2026-12-10">
                     <span class="etiqueta">Romance</span>
                     <h3>Os Maias</h3>
                     <p>Eça de Queirós</p>
-                    <a href="#" class="botao">Inscrever-me</a>
+                    <button class="botao reservar" type="button">Reservar</button>
                 </article>
             </div>
+        </section>
+
+        <section id="pesquisa-e-sugestoes" class="cartao">
+            <h2>Pesquisa e sugestões</h2>
+            <div class="campo">
+                <label for="campo-pesquisa-local">Pesquisar livros</label>
+                <input id="campo-pesquisa-local" name="pesquisa" type="search" autocomplete="off">
+            </div>
+            <p id="texto-pesquisa" class="ajuda" aria-live="polite"></p>
+            <div class="campo">
+                <label for="sugestao">Sugestão de leitura</label>
+                <textarea id="sugestao" name="sugestao" rows="4" maxlength="200"></textarea>
+                <span id="contador-sugestao" class="contador" aria-live="polite">0 / 200</span>
+            </div>
+        </section>
+
+        <section class="cartao" aria-labelledby="titulo-progresso">
+            <h2 id="titulo-progresso">Progresso de leitura</h2>
+            <div class="controlo-cor">
+                <label for="cor-destaque">Cor de destaque</label>
+                <input id="cor-destaque" type="color" value="#a84b33">
+            </div>
+            <label for="barra-leitura">Percentagem lida</label>
+            <input id="barra-leitura" type="range" min="0" max="100" value="0">
+            <div class="barra-progresso" aria-hidden="true">
+                <div id="progresso" class="progresso"></div>
+            </div>
+            <p id="texto-progresso" class="ajuda" aria-live="polite">0% lido</p>
+        </section>
+
+        <section id="eventos" class="cartao eventos" aria-labelledby="titulo-eventos">
+            <h2 id="titulo-eventos">Próximos eventos</h2>
+            <article class="evento">
+                <h3>Clube de leitura</h3>
+                <p>Terças-feiras às 18h</p>
+                <button class="botao reservar" type="button">Reservar</button>
+            </article>
+            <article class="evento">
+                <h3>Sessão de autores</h3>
+                <p>Sábados às 15h</p>
+                <button class="botao reservar" type="button">Reservar</button>
+            </article>
+        </section>
+
+        <section id="inscricao-clube" class="cartao">
+            <h2>Inscrição no clube</h2>
+            <form id="formulario-clube" class="formulario">
+                <div class="campo">
+                    <label for="clube-nome">Nome completo</label>
+                    <input id="clube-nome" name="nome" type="text" autocomplete="name" required>
+                </div>
+                <div class="campo">
+                    <label for="clube-email">E-mail</label>
+                    <input id="clube-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="campo">
+                    <label for="clube-tipo">Clube</label>
+                    <select id="clube-tipo" name="clube" required>
+                        <option value="">Escolhe um clube</option>
+                        <option value="Policiais">Policiais</option>
+                        <option value="Ficção">Ficção</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Poesia">Poesia</option>
+                        <option value="Infantil">Infantil</option>
+                    </select>
+                </div>
+                <label class="opcao">
+                    <input name="regras" type="checkbox" required>
+                    Aceito as regras do clube
+                </label>
+                <button class="botao" type="submit">Inscrever</button>
+            </form>
+            <p id="mensagem-clube" class="mensagem" role="status" aria-live="polite"></p>
+        </section>
+
+        <section id="minha-lista" class="cartao">
+            <h2>Lista de leitura</h2>
+            <p id="resumo-leitura" class="ajuda" aria-live="polite">A lista está vazia.</p>
+            <form id="formulario-leitura" class="formulario">
+                <label for="novo-livro">Novo livro</label>
+                <div class="linha">
+                    <input id="novo-livro" name="livro" type="text" placeholder="Título do livro" required>
+                    <button class="botao" type="submit">Adicionar</button>
+                </div>
+            </form>
+            <p id="mensagem-leitura" class="mensagem" role="status" aria-live="polite"></p>
+            <button id="limpar-lista" class="botao botao-secundario botao-pequeno" type="button">Limpar tudo</button>
+            <ul id="lista-leitura" class="lista"></ul>
         </section>
     </main>
 
     <aside>
-        <h3>Horário</h3>
+        <h2>Horário</h2>
         <p>Segunda a Sexta: 09h00 – 19h00</p>
         <p>Sábado: 10h00 – 14h00</p>
     </aside>
 
     <footer>
-        <p>&copy; 2026 Biblioteca do Bairro</p>
-        <p>Rua das Flores, 12</p>
+        <p>&copy; 2026 Biblioteca do Bairro · Rua das Flores, 12</p>
     </footer>
-
 </body>
 </html>

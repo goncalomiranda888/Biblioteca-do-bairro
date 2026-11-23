@@ -11,13 +11,15 @@
 <body>
     <header class="cabecalho">
         <a class="marca" href="index.html">Biblioteca do Bairro</a>
-        <nav aria-label="Navegação principal">
+        <nav id="navegacao-principal" aria-label="Navegação principal">
             <a href="index.html">Início</a>
             <a href="catalogo.html" aria-current="page">Catálogo</a>
         </nav>
-        <button id="alternar-tema" class="botao botao-secundario" type="button" aria-pressed="false">
-            Modo escuro
-        </button>
+        <div class="tema-controlos">
+            <button class="botao botao-secundario" type="button" data-tema-botao aria-pressed="false">Tema escuro</button>
+            <button class="botao-texto" type="button" data-seguir-sistema>Seguir o sistema</button>
+            <button id="botao-menu" class="botao botao-secundario" type="button" aria-controls="navegacao-principal" aria-expanded="false">Menu</button>
+        </div>
     </header>
 
     <main>
@@ -27,10 +29,28 @@
             <p>Encontra a tua próxima leitura e guarda os teus livros favoritos.</p>
         </section>
 
+        <section class="pesquisa" aria-label="Pesquisa e histórico">
+            <form id="formulario-pesquisa" class="formulario-pesquisa">
+                <label for="campo-pesquisa">Pesquisar no catálogo</label>
+                <div class="linha">
+                    <input id="campo-pesquisa" name="pesquisa" type="search" placeholder="Título ou autor" autocomplete="off">
+                    <button class="botao" type="submit">Pesquisar</button>
+                </div>
+            </form>
+
+            <div class="ultimas">
+                <div class="ultimas-topo">
+                    <h2>Últimas pesquisas</h2>
+                    <button id="limpar-pesquisas" class="botao-texto" type="button">Limpar</button>
+                </div>
+                <div id="lista-pesquisas" class="chips" aria-label="Histórico de pesquisas"></div>
+            </div>
+        </section>
+
         <section class="catalogo" aria-labelledby="titulo-catalogo">
             <div class="cabecalho-seccao">
                 <div>
-                    <h2 id="titulo-catalogo"></h2>
+                    <h2 id="titulo-catalogo">Livros</h2>
                     <p id="livro-mais-antigo" class="texto-secundario"></p>
                 </div>
                 <button id="alternar-disponiveis" class="botao botao-secundario" type="button" aria-pressed="false">
@@ -38,19 +58,29 @@
                 </button>
             </div>
 
-            <label class="campo-pesquisa" for="pesquisa-livros">
-                Pesquisar por título ou autor
-                <input id="pesquisa-livros" type="search" placeholder="Ex.: Os Maias" autocomplete="off">
-            </label>
-
+            <p id="resumo-catalogo" class="texto-secundario" role="status" aria-live="polite"></p>
             <p id="mensagem-catalogo" class="mensagem" role="status" aria-live="polite"></p>
-            <ul id="lista-livros"></ul>
+            <ul id="lista-livros" class="livros" aria-live="polite"></ul>
+            <template id="modelo-livro">
+                <li class="livro-card">
+                    <h3 class="livro-titulo"></h3>
+                    <p class="livro-autor"></p>
+                    <p class="aviso-emprestado" hidden>Livro emprestado</p>
+                    <div class="livro-rodape">
+                        <span class="livro-ano"></span>
+                        <div class="acoes-item">
+                            <button class="botao botao-secundario botao-pequeno guardar-livro" data-acao="guardar" type="button"></button>
+                            <button class="botao botao-pequeno emprestar-livro" data-acao="emprestar" type="button">Emprestar</button>
+                        </div>
+                    </div>
+                </li>
+            </template>
         </section>
 
         <section class="inscricao" aria-labelledby="titulo-inscricao">
             <h2 id="titulo-inscricao">Inscrição na biblioteca</h2>
             <p>Preenche os teus dados para receber novidades da biblioteca.</p>
-            <form id="formulario-inscricao" novalidate>
+            <form id="formulario-inscricao">
                 <label for="nome">Nome</label>
                 <input id="nome" name="nome" type="text" autocomplete="name" required minlength="2">
 
