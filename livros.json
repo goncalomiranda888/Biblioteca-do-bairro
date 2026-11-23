@@ -3,36 +3,42 @@
         "titulo": "Os Maias",
         "autor": "Eça de Queirós",
         "ano": 1888,
+        "capa": "https://covers.openlibrary.org/b/id/104218-M.jpg",
         "disponivel": true
     },
     {
         "titulo": "Mensagem",
         "autor": "Fernando Pessoa",
         "ano": 1934,
+        "capa": "https://covers.openlibrary.org/b/id/8025492-M.jpg",
         "disponivel": true
     },
     {
         "titulo": "A Sibila",
         "autor": "Agustina Bessa-Luís",
         "ano": 1954,
+        "capa": "",
         "disponivel": false
     },
     {
         "titulo": "O Principezinho",
         "autor": "Antoine de Saint-Exupéry",
         "ano": 1943,
+        "capa": "https://covers.openlibrary.org/b/id/10555406-M.jpg",
         "disponivel": true
     },
     {
         "titulo": "Ensaio sobre a Cegueira",
         "autor": "José Saramago",
         "ano": 1995,
+        "capa": "https://covers.openlibrary.org/b/id/10482411-M.jpg",
         "disponivel": true
     },
     {
         "titulo": "Aparição",
         "autor": "Vergílio Ferreira",
         "ano": 1959,
+        "capa": "https://covers.openlibrary.org/b/id/12286635-M.jpg",
         "disponivel": false
     }
 ]

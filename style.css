@@ -1072,7 +1072,7 @@ input[type="range"] {
 }
 
 .livro-card {
-    min-height: 210px;
+    min-height: 345px;
     padding: 1.1rem;
     border-radius: 0.85rem;
     box-shadow: 0 8px 24px rgb(25 48 53 / 5%);
@@ -1087,6 +1087,16 @@ input[type="range"] {
 
 .livro-card.emprestado {
     border-left: 3px solid var(--cor-destaque);
+}
+
+.livro-capa {
+    width: 132px;
+    height: 180px;
+    align-self: center;
+    border-radius: 0.45rem;
+    background: var(--cor-fundo);
+    box-shadow: 0 8px 20px rgb(17 31 34 / 14%);
+    object-fit: cover;
 }
 
 .aviso-emprestado {

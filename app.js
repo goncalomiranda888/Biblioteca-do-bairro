@@ -3,6 +3,50 @@ const CHAVE_LISTA = "biblioteca:leitura";
 const CHAVE_FAVORITOS = "biblioteca-favoritos";
 const CHAVE_HISTORICO = "biblioteca:historico-pesquisas";
 
+function escaparXml(texto) {
+    return texto.replace(/[<>&'"]/g, (caracter) => ({
+        "<": "&lt;",
+        ">": "&gt;",
+        "&": "&amp;",
+        "'": "&apos;",
+        "\"": "&quot;"
+    })[caracter]);
+}
+
+function criarCapaFallback(titulo, autor) {
+    const linhas = [];
+    let linha = "";
+
+    titulo.split(/\s+/).forEach((palavra) => {
+        if (linha && `${linha} ${palavra}`.length > 16) {
+            linhas.push(linha);
+            linha = palavra;
+        } else {
+            linha = linha ? `${linha} ${palavra}` : palavra;
+        }
+    });
+    if (linha) {
+        linhas.push(linha);
+    }
+
+    const tituloSvg = linhas.slice(0, 4)
+        .map((texto, indice) => `<tspan x="30" dy="${indice === 0 ? 0 : 34}">${escaparXml(texto)}</tspan>`)
+        .join("");
+    const autorSvg = escaparXml(autor);
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="280" height="380" viewBox="0 0 280 380"><rect width="280" height="380" fill="#1f4e5f"/><rect x="16" y="16" width="248" height="348" fill="none" stroke="#e0b875" stroke-width="2"/><circle cx="228" cy="72" r="44" fill="#e0b875" opacity=".16"/><text x="30" y="58" fill="#e0b875" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2">BIBLIOTECA DO BAIRRO</text><text x="30" y="172" fill="#ffffff" font-family="Georgia, serif" font-size="26" font-weight="700">${tituloSvg}</text><line x1="30" y1="300" x2="95" y2="300" stroke="#e0b875" stroke-width="3"/><text x="30" y="330" fill="#e8efec" font-family="Arial, sans-serif" font-size="13">${autorSvg}</text></svg>`;
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function definirCapa(imagem, titulo, autor, url) {
+    const fallback = criarCapaFallback(titulo, autor);
+    imagem.alt = `Capa de ${titulo}`;
+    imagem.decoding = "async";
+    imagem.addEventListener("error", () => {
+        imagem.src = fallback;
+    }, { once: true });
+    imagem.src = url || fallback;
+}
+
 // Tema claro/escuro
 const preferenciaSistema = window.matchMedia("(prefers-color-scheme: dark)");
 const botoesTema = document.querySelectorAll("[data-tema-botao]");
@@ -67,14 +111,20 @@ if (livroDestaque) {
     const verMaisDestaque = document.querySelector("#ver-mais-destaque");
 
     tituloDestaque.textContent = "Memorial do Convento";
-    capaDestaque.src = "https://placehold.co/240x320/1f4e5f/ffffff?text=Memorial";
-    capaDestaque.alt = "Capa de Memorial do Convento";
+    definirCapa(capaDestaque, tituloDestaque.textContent, "José Saramago", capaDestaque.dataset.capaUrl);
     verMaisDestaque.href = "/catalogo?autor=Jose%20Saramago";
     const estadosLivro = {
         disponivel: "Disponível",
         emprestado: "Emprestado"
     };
     estadoDestaque.textContent = `Estado: ${estadosLivro[livroDestaque.dataset.estado] || livroDestaque.dataset.estado}`;
+
+    document.querySelectorAll(".cartao.livro:not(#livro-destaque) .capa").forEach((imagem) => {
+        const livro = imagem.closest(".livro");
+        const titulo = livro.querySelector("h3").textContent;
+        const autor = livro.querySelector("p").textContent;
+        definirCapa(imagem, titulo, autor, imagem.dataset.capaUrl);
+    });
 
     document.querySelectorAll(".livro[data-estado='emprestado']").forEach((livro) => {
         const botaoReservar = livro.querySelector(".reservar");
@@ -461,6 +511,7 @@ if (listaLivros && campoPesquisaCatalogo) {
         item.dataset.indice = String(indice);
         item.dataset.estado = livro.estado;
         item.classList.toggle("emprestado", livro.estado === "emprestado");
+        definirCapa(item.querySelector(".livro-capa"), livro.titulo, livro.autor, livro.capa);
         item.querySelector(".livro-titulo").textContent = livro.titulo;
         item.querySelector(".livro-autor").textContent = livro.autor;
         item.querySelector(".livro-ano").textContent = String(livro.ano);
@@ -611,6 +662,7 @@ if (listaLivros && campoPesquisaCatalogo) {
                 typeof livro.titulo === "string" &&
                 typeof livro.autor === "string" &&
                 Number.isInteger(livro.ano) &&
+                typeof livro.capa === "string" &&
                 typeof livro.disponivel === "boolean"
             )) {
                 throw new Error("O ficheiro não contém uma lista válida de livros.");
@@ -620,6 +672,7 @@ if (listaLivros && campoPesquisaCatalogo) {
                 titulo: livro.titulo,
                 autor: livro.autor,
                 ano: livro.ano,
+                capa: livro.capa,
                 estado: livro.disponivel ? "disponivel" : "emprestado"
             }));
 
